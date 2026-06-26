@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>협업 XR 저작을 위한 객체 단계 버전 관리 워크플로우</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="deck" aria-live="polite">
+      <div class="logo-bar" aria-label="affiliation logos">
+        <img class="logo-kaist" src="assets/logos/kaist-logo.png" alt="KAIST">
+        <img class="logo-uvr" src="assets/logos/uvr-logo.png" alt="KAIST UVR Lab">
+        <img class="logo-metaverse" src="assets/logos/metaverse-logo.png" alt="Graduate School of Metaverse">
+      </div>
+
+      <section class="slide title-slide active" data-title="Title">
+        <div class="title-grid">
+          <div>
+            <p class="eyebrow">15 Minute Presentation</p>
+            <h1>협업 XR 저작을 위한<br>객체 단계 버전 관리 워크플로우</h1>
+            <p class="subtitle">Object-Level Version-Control Workflows for Object Editing in Collaborative XR Authoring</p>
+          </div>
+          <div class="meta-card">
+            <span>Unity 6000.3.10f</span>
+            <span>Meta Quest 3</span>
+            <span>Standalone XR Prototype</span>
+            <span>On-device JSON Repository</span>
+          </div>
+        </div>
+        <p class="presenter">이승재, 백민주, 우운택 · KAIST · UVR Lab</p>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Motivation</p>
+        <h2>XR 저작은 쉬워졌지만, 변경 이력 관리는 아직 약합니다</h2>
+        <div class="three-columns">
+          <article>
+            <span class="icon-block coral">01</span>
+            <h3>직접 조작 중심</h3>
+            <p>사용자는 XR 공간에서 물체를 이동, 회전, 크기 변경, 색상 변경하며 빠르게 아이디어를 실험합니다.</p>
+          </article>
+          <article>
+            <span class="icon-block gold">02</span>
+            <h3>반복 수정 증가</h3>
+            <p>디자인, 교육, 트레이닝, 콘텐츠 제작에서는 같은 객체를 여러 사람이 여러 번 다듬습니다.</p>
+          </article>
+          <article>
+            <span class="icon-block teal">03</span>
+            <h3>덮어쓰기 위험</h3>
+            <p>여러 사용자가 독립적으로 수정하면 어떤 상태가 최신인지, 어떤 변경을 합칠지 판단하기 어렵습니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Problem Gap</p>
+        <h2>기존 방식은 동시 편집에는 강하지만, 비선형 협업에는 부족합니다</h2>
+        <div class="comparison">
+          <div class="compare-card muted-card">
+            <h3>Linear undo / redo</h3>
+            <p>짧은 개인 작업 흐름에는 유용하지만, 여러 대안 경로를 보존하거나 나중에 병합하기 어렵습니다.</p>
+          </div>
+          <div class="compare-card muted-card">
+            <h3>Real-time synchronization</h3>
+            <p>동시 작업의 상태 공유에는 적합하지만, 비동기적으로 만든 변경안을 검토하는 절차는 약합니다.</p>
+          </div>
+          <div class="compare-card accent-card">
+            <h3>Needed workflow</h3>
+            <p>객체 변경 이력을 추적하고, 대안 브랜치를 보존하며, 충돌을 비교하고 선택적으로 병합하는 구조가 필요합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Idea</p>
+        <h2>소프트웨어 Git의 개념을 XR 객체 편집 워크플로우로 옮깁니다</h2>
+        <div class="idea-map">
+          <div class="idea-source">Git Concepts</div>
+          <div class="idea-arrow"></div>
+          <div class="idea-target">Immersive Object Editing</div>
+        </div>
+        <div class="mapping-grid">
+          <div><strong>Commit</strong><span>객체 상태 스냅샷</span></div>
+          <div><strong>Branch</strong><span>대안 수정 경로</span></div>
+          <div><strong>Pull Request</strong><span>변경 검토 요청</span></div>
+          <div><strong>Merge Conflict</strong><span>속성 단위 충돌 비교</span></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">System Overview</p>
+        <h2>제안 시스템은 객체 단위 저장소와 XR 내부 제어 UI로 구성됩니다</h2>
+        <div class="figure-layout">
+          <figure class="paper-figure">
+            <img src="assets/figures/figure-1-repository-panel.png" alt="Repository control panel for versioning operations">
+            <figcaption>Figure 1. Repository control panel for versioning operations.</figcaption>
+          </figure>
+          <div class="system-points">
+            <div>
+              <h3>Shared Virtual Object</h3>
+              <p>position, rotation, scale, color, interactable, sensitivity를 객체 상태로 캡처합니다.</p>
+            </div>
+            <div>
+              <h3>In-world Control UI</h3>
+              <p>commit, branch, PR, merge, checkout을 XR 공간에서 실행합니다.</p>
+            </div>
+            <div>
+              <h3>JSON Repository</h3>
+              <p>commit, branch, PR, conflict 정보를 기기 내부에 저장합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Repository Model</p>
+        <h2>전체 장면 대신, 의미 있는 객체 상태만 버전 관리합니다</h2>
+        <div class="model-grid">
+          <div class="code-card">
+            <h3>RepositoryData</h3>
+            <p>repositoryName, activeBranchName, commits, branches, pullRequests를 보존합니다.</p>
+          </div>
+          <div class="code-card">
+            <h3>CommitNode</h3>
+            <p>parentCommitId, branchName, object state, changedAttributes를 저장합니다.</p>
+          </div>
+          <div class="code-card">
+            <h3>ObjectState</h3>
+            <p>위치, 회전, 크기, 색상 같은 저수준 속성을 캡처하고 다시 적용합니다.</p>
+          </div>
+        </div>
+        <p class="takeaway-line">핵심 효과: 전체 scene snapshot보다 가볍고, 사용자가 말할 수 있는 수정 단위와 더 가깝습니다.</p>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Commit & Branch</p>
+        <h2>기존 진행을 깨지 않고, 과거 상태에서 새 대안을 만들 수 있습니다</h2>
+        <div class="figure-layout wide-figure">
+          <figure class="paper-figure">
+            <img src="assets/figures/figure-2-commit-graph.png" alt="Commit graph visualization showing branch lineage">
+            <figcaption>Figure 2. Commit graph visualization showing branch lineage.</figcaption>
+          </figure>
+          <div class="system-points">
+            <div>
+              <h3>Branch lanes</h3>
+              <p>main branch와 sub branch를 공간적으로 분리해 lineage를 훑어볼 수 있습니다.</p>
+            </div>
+            <div>
+              <h3>Detached commit</h3>
+              <p>과거 commit에서 수정하면 새 branch를 자동 생성해 기존 진행을 덮어쓰지 않습니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Pull Request & Merge</p>
+        <h2>수정안은 바로 반영되지 않고, 검토 가능한 PR로 통합됩니다</h2>
+        <div class="flow-cards">
+          <div><span>1</span><strong>Branch Head</strong><p>대안 객체 상태가 준비됩니다.</p></div>
+          <div><span>2</span><strong>Pull Request</strong><p>main head와 branch head의 변경 속성을 요약합니다.</p></div>
+          <div><span>3</span><strong>Three-way Diff</strong><p>base, main, branch를 비교해 충돌 여부를 판단합니다.</p></div>
+          <div><span>4</span><strong>Merge Commit</strong><p>충돌이 없거나 해결되면 main에 새 commit을 생성합니다.</p></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Conflict Resolution</p>
+        <h2>충돌은 텍스트 목록만이 아니라, XR 공간의 미니어처 비교로 보여줍니다</h2>
+        <div class="figure-layout">
+          <figure class="paper-figure">
+            <img src="assets/figures/figure-3-conflict-resolution.png" alt="Conflict resolution interface for selecting attribute values during merge">
+            <figcaption>Figure 3. Conflict resolution interface for selecting attribute values during merge.</figcaption>
+          </figure>
+          <div class="system-points">
+            <div>
+              <h3>Main vs PR Head</h3>
+              <p>두 revision을 side-by-side miniature로 비교해 변경 결과를 공간적으로 확인합니다.</p>
+            </div>
+            <div>
+              <h3>Attribute choices</h3>
+              <p>Rotation, Scale 등 충돌 속성별로 Main 또는 Branch 값을 선택합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Prototype Implementation</p>
+        <h2>프로토타입은 Meta Quest 3에서 standalone XR 앱으로 구현했습니다</h2>
+        <div class="implementation-grid">
+          <div>
+            <h3>VersionControlManager</h3>
+            <p>repository 초기화, commit, branch, PR, merge를 조정하는 핵심 컨트롤러입니다.</p>
+          </div>
+          <div>
+            <h3>StateDiffUtility</h3>
+            <p>객체 속성 비교와 base-main-branch 기반 conflict detection을 수행합니다.</p>
+          </div>
+          <div>
+            <h3>JsonRepositoryStorage</h3>
+            <p>repository_autosave.json을 Application.persistentDataPath에 저장합니다.</p>
+          </div>
+          <div>
+            <h3>ConflictPreviewController</h3>
+            <p>main head와 PR head를 side-by-side miniature로 시각화합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Demo Plan</p>
+        <h2>발표 데모는 하나의 객체가 어떻게 이력을 갖는지 보여주면 됩니다</h2>
+        <ol class="demo-list">
+          <li><strong>초기 상태:</strong> repository가 main branch와 initial commit을 만듭니다.</li>
+          <li><strong>수정과 commit:</strong> 객체를 이동하거나 색을 바꾸고 현재 상태를 commit합니다.</li>
+          <li><strong>branch 실험:</strong> branch를 만들어 다른 수정안을 만듭니다.</li>
+          <li><strong>PR 생성:</strong> main과 branch의 변경 속성을 비교합니다.</li>
+          <li><strong>conflict review:</strong> 미니어처와 텍스트 요약을 보며 값을 선택합니다.</li>
+          <li><strong>merge:</strong> 해결된 상태가 main의 새 merge commit으로 저장됩니다.</li>
+        </ol>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Contribution</p>
+        <h2>본 연구의 기여는 XR 안에서 버전 관리를 상호작용으로 만든 점입니다</h2>
+        <div class="contribution-stack">
+          <div><strong>1</strong><span>협업 XR 저작을 위한 Git-inspired workflow system</span></div>
+          <div><strong>2</strong><span>객체 단위 commit과 branch를 통한 traceable revision history</span></div>
+          <div><strong>3</strong><span>XR 공간에서의 commit graph, PR review, conflict preview 인터페이스</span></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Limitations & Future Work</p>
+        <h2>현재는 feasibility prototype이며, 다음 단계는 확장성입니다</h2>
+        <div class="future-grid">
+          <article>
+            <h3>Current limitation</h3>
+            <p>현재 시스템은 단일 공유 객체에 집중합니다. 실제 XR 저작에서는 여러 객체와 관계가 함께 바뀝니다.</p>
+          </article>
+          <article>
+            <h3>Attribute level</h3>
+            <p>현재는 position, rotation, scale, color 같은 저수준 속성이 중심입니다.</p>
+          </article>
+          <article>
+            <h3>Next work</h3>
+            <p>multi-object history, semantic edit representation, multi-user evaluation으로 확장할 수 있습니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide closing-slide">
+        <p class="eyebrow">Conclusion</p>
+        <h2>XR 협업에서도 변경 이력은 공간 안에서 이해되고 조작될 수 있습니다</h2>
+        <p class="closing-copy">
+          제안 시스템은 object-level versioning, branch-based exploration, pull request review,
+          conflict-aware merge resolution을 XR 저작 환경 안으로 가져옵니다.
+        </p>
+        <div class="final-line">Asynchronous, traceable, and conflict-aware XR authoring</div>
+      </section>
+    </main>
+
+    <div class="progress" aria-hidden="true">
+      <div class="progress-bar"></div>
+      <span class="slide-count"></span>
+    </div>
+
+    <script src="slides.js"></script>
+  </body>
+</html>
