@@ -52,6 +52,15 @@ document.addEventListener("keydown", (event) => {
     event.preventDefault();
     updateSlide(slides.length - 1);
   }
+
+  if (event.key.toLowerCase() === "f") {
+    event.preventDefault();
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+  }
 });
 
 document.addEventListener("click", (event) => {
