@@ -229,15 +229,15 @@ li {
 }
 
 .three-columns article {
-  min-height: 470px;
+  min-height: 66vh;
 }
 
 .comparison .compare-card {
-  min-height: 430px;
+  min-height: 60vh;
 }
 
 .model-grid .code-card {
-  min-height: 430px;
+  min-height: 60vh;
 }
 
 .three-columns article,
@@ -414,7 +414,7 @@ li {
 }
 
 .flow-cards div {
-  min-height: 430px;
+  min-height: 58vh;
   padding: 32px;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -502,7 +502,7 @@ li {
 }
 
 .future-grid article {
-  min-height: 450px;
+  min-height: 58vh;
   border-top: 7px solid var(--warm);
 }
 
