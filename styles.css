@@ -471,14 +471,37 @@ li {
   border-top: 7px solid var(--warm);
 }
 
+.closing-slide {
+  display: none;
+  place-items: center;
+  text-align: center;
+}
+
+.closing-slide.active {
+  display: grid;
+}
+
+.closing-slide h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.closing-grid {
+  display: block;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
 .closing-copy {
-  max-width: 980px;
-  margin-bottom: 34px;
+  max-width: 1040px;
+  margin: 0 auto 38px;
   font-size: clamp(24px, 2vw, 34px);
 }
 
 .final-line {
-  display: inline-block;
+  display: block;
+  max-width: 860px;
+  margin: 0 auto;
   padding: 22px 34px;
   border: 2px solid rgba(23, 107, 135, 0.5);
   border-radius: 14px;
@@ -487,24 +510,20 @@ li {
   font-weight: 900;
 }
 
-.closing-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
-  gap: 54px;
-  align-items: center;
-  margin-top: 28px;
-}
-
 .contact-line {
-  margin: 30px 0 0;
+  margin: 24px 0 0;
   color: var(--accent);
-  font-size: clamp(24px, 2vw, 34px);
+  font-size: clamp(22px, 1.8vw, 30px);
   font-weight: 850;
 }
 
 .qr-card {
+  position: absolute;
+  right: clamp(46px, 5vw, 78px);
+  bottom: clamp(58px, 6vw, 92px);
+  width: clamp(150px, 13vw, 220px);
   margin: 0;
-  padding: 18px;
+  padding: 14px;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--soft);
@@ -521,9 +540,9 @@ li {
 }
 
 .qr-card figcaption {
-  margin-top: 12px;
+  margin-top: 10px;
   color: var(--muted);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 750;
 }
 
