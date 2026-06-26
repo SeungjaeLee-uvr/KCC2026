@@ -59,16 +59,71 @@
           <div class="compare-card muted-card">
             <h3>Linear undo / redo</h3>
             <p>짧은 개인 작업에는 유용하지만, 대안 경로 보존과 사후 병합이 어려움</p>
+            <p class="citation">Related: Just Undo It [7]</p>
           </div>
           <div class="compare-card muted-card">
             <h3>Real-time synchronization</h3>
             <p>동시 상태 공유에는 적합하지만, 비동기 변경안 검토 절차가 약함</p>
+            <p class="citation">Contrast: Just Undo It [7]</p>
           </div>
           <div class="compare-card accent-card">
             <h3>Needed workflow</h3>
             <p>객체 이력 추적, 대안 브랜치 보존, 충돌 비교, 선택 병합 구조 필요</p>
+            <p class="citation">Compared with: VRGit [8]</p>
           </div>
         </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Related Work 1</p>
+        <h2>Just Undo It은<br>협업 VR에서 undo 기대를 분석</h2>
+        <div class="related-grid">
+          <article>
+            <span class="related-index">1</span>
+            <h3>Focus</h3>
+            <p>multi-user VR 환경에서 undo 동작과 사용자 기대 탐색</p>
+            <p class="citation">Just Undo It [7]</p>
+          </article>
+          <article>
+            <span class="related-index">2</span>
+            <h3>Contribution</h3>
+            <p>협업 상황에서 단순 되돌리기가 사회적 의미와 충돌 가능성을 갖는다는 관찰</p>
+            <p class="citation">Undo as collaborative action</p>
+          </article>
+          <article>
+            <span class="related-index">3</span>
+            <h3>Remaining gap</h3>
+            <p>undo 중심 복원은 가능하지만, 대안 경로 보존과 pull-request식 사후 검토는 약함</p>
+            <p class="citation">Need: branch + review</p>
+          </article>
+        </div>
+        <p class="takeaway-line related-takeaway">본 연구 연결: undo를 넘어 객체 변경 이력, 브랜치, 검토 가능한 통합 흐름으로 확장</p>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Related Work 2</p>
+        <h2>VRGit은<br>VR 안의 버전 탐색 가능성을 제시</h2>
+        <div class="related-grid">
+          <article>
+            <span class="related-index">1</span>
+            <h3>Focus</h3>
+            <p>VR 환경에서 버전 이력 탐색과 변경 상태 비교를 지원하는 Git-inspired interaction</p>
+            <p class="citation">VRGit [8]</p>
+          </article>
+          <article>
+            <span class="related-index">2</span>
+            <h3>Contribution</h3>
+            <p>공간 안에서 version navigation을 수행하고 revision 차이를 이해하는 방식 제안</p>
+            <p class="citation">Spatial version control</p>
+          </article>
+          <article>
+            <span class="related-index">3</span>
+            <h3>Remaining gap</h3>
+            <p>객체 단위 PR 생성, 속성별 conflict preview, 선택 병합 workflow는 추가 필요</p>
+            <p class="citation">Need: PR + merge resolution</p>
+          </article>
+        </div>
+        <p class="takeaway-line related-takeaway">본 연구 위치: object-level history, PR review, conflict-aware merge workflow의 프로토타입 구현</p>
       </section>
 
       <section class="slide">

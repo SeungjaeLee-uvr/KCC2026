@@ -180,6 +180,7 @@ li {
 .mapping-grid div,
 .three-columns article,
 .compare-card,
+.related-grid article,
 .code-card,
 .implementation-grid > div,
 .future-grid article,
@@ -207,6 +208,7 @@ li {
 
 .three-columns,
 .comparison,
+.related-grid,
 .model-grid,
 .future-grid {
   display: grid;
@@ -216,6 +218,7 @@ li {
 
 .three-columns article,
 .compare-card,
+.related-grid article,
 .code-card,
 .implementation-grid > div,
 .future-grid article {
@@ -224,6 +227,7 @@ li {
 }
 
 .three-columns article,
+.related-grid article,
 .code-card {
   border-top: 6px solid rgba(23, 107, 135, 0.18);
 }
@@ -236,18 +240,49 @@ li {
   min-height: 60vh;
 }
 
+.related-grid article {
+  min-height: 54vh;
+}
+
 .model-grid .code-card {
   min-height: 46vh;
 }
 
 .three-columns article,
 .compare-card,
+.related-grid article,
 .code-card,
 .flow-cards div,
 .future-grid article {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.related-index {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 22px;
+  border-radius: 14px;
+  background: var(--accent);
+  color: white;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.citation {
+  margin: auto 0 0;
+  padding-top: 22px;
+  color: var(--accent);
+  font-size: clamp(13px, 0.95vw, 17px);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.related-takeaway {
+  margin-top: 28px;
 }
 
 .icon-block {
